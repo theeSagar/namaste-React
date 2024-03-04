@@ -1,3 +1,6 @@
+import React from "react"; // this "react" is coming from node modules
+import ReactDOM from "react-dom/client";
+
 const heading = React.createElement(
   "h1",
   { id: "heading", xyz: "ClassHEading" }, // these are
@@ -11,22 +14,26 @@ const heading = React.createElement(
 
 // ----------------- -Practising creating nested elements in html
 
-const felement = React.createElement("div",{ id: "parent" },
+const felement = React.createElement(
+  "div",
+  { id: "parent" },
   React.createElement("div", { id: "child" }, [
-    React.createElement("h1",
-      { id: "heading" },
-      "I am a H1 tag inside child which is inside Parent"
-    ),React.createElement(
+    React.createElement(
       "h1",
       { id: "heading" },
-      "I am a H2 tag sibling of h1 tag which is inside Parent"
+      "my name is sagar"
+    ),
+    React.createElement(
+      "h1",
+      { id: "heading" },
+      "I am a H2 tag  Parent"
     ),
   ]),
   React.createElement("div", { id: "child2" }, [
-    React.createElement("h1", {}, "I am h12"),
-    React.createElement("h2", {}, "I am h22"),
+    React.createElement("h1", {}, "SSD working fine1 "),
+    React.createElement("h2", {}, "NOW SSD work fine 1"),
   ])
-);//------------+++++++to avoid all this above confusion we write in JSX---------------------+++--
+); //------------+++++++ to avoid all this above confusion we write in JSX---------------------+++--
 
 const creatingDOMMy = ReactDOM.createRoot(document.querySelector(".lorem"));
 creatingDOMMy.render(felement);

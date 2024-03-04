@@ -1,0 +1,29 @@
+{
+  "name": "namastereact",
+  "version": "1.0.0",
+  "description": "This is a first Episode Namaste React also learning about npm ",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theeSagar/namaste-React.git"
+  },
+  "author": "sagar verma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theeSagar/namaste-React/issues"
+  },
+  "homepage": "https://github.com/theeSagar/namaste-React#readme",
+  "devDependencies": {
+    "parcel": "^2.12.0",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserslist":[
+    "last 2 Chrome version"    
+  ]
+}
