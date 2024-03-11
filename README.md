@@ -19,3 +19,10 @@
 - Error Handling
 - HTTPs
 - Tree Shaking - will remove unused code
+
+# React Hooks-> 
+- They are just normal JavaScript fucntions with some superpowers in them with some logic written behind.
+
+Two important hooks-
+-- useState()
+--useEffect()

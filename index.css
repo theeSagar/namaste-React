@@ -45,8 +45,15 @@ body{
     flex-wrap:wrap;
     
 }
-.search{
-    padding: 20px;
+.filter-btn{
+    padding: 8px;
+    cursor: pointer;
+    background-color: aquamarine;
+    margin-left: 85vh;
+    margin-bottom: 10px;
+}
+.filter-btn:hover{
+    background-color: rgb(189, 245, 226);
 }
 .res-logo{
     width: 100%;
