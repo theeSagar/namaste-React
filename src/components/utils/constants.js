@@ -556,7 +556,8 @@
     reviewsSummary: {},
     displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
     restaurantOfferPresentationInfo: {},
-  },{
+  },
+  {
     
     "id": "361096",
     "name": "The Good Bowl",
@@ -629,7 +630,8 @@
     "restaurantOfferPresentationInfo": {
       
     }
-  },{
+  },
+  {
     "id": "432387",
                       "name": "The Belgian Waffle Co.",
                       "cloudinaryImageId": "5116a385bac0548e06c33c08350fbf11",
@@ -712,7 +714,8 @@
                       "restaurantOfferPresentationInfo": {
                         
                       }
-  },{
+  },
+  {
     "id": "361093",
                       "name": "Firangi Bake",
                       "cloudinaryImageId": "qk0qfdxgynkfsmzpwyu5",
@@ -800,7 +803,8 @@
                       "restaurantOfferPresentationInfo": {
                         
                       }
-  },{
+  },
+  {
     "id": "361094",
                       "name": "Sweet Truth - Cake and Desserts",
                       "cloudinaryImageId": "81cf6bfe2760a45a0caf2e28716ca4d7",

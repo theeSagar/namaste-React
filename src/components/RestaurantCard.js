@@ -5,20 +5,21 @@ const RestaurantCard = (props) => {
     const { resData} = props;
     // console.log(props.resData?.info?.sla?.deliveryTime); // Using optional chaining
     // console.log(resData.sla.deliveryTime);
+    // console.log(resData.info.name)
   
     return (
       <div className="res-card">
         <img
           className="res-logo"
           alt="res=logo"
-          src={ CDN_URL + resData.cloudinaryImageId
+          src={ CDN_URL + resData.info.cloudinaryImageId
           }
           // string concatinating above
         />
-        <h3>{resData.name}</h3>
-        <h3>{resData.cuisines.join(", ")}</h3>
-        <h4>{resData.avgRating} Stars</h4>
-        <h4>{resData.sla.deliveryTime}</h4>
+        <h3>{resData.info.name}</h3>
+        <h3>{resData.info.cuisines.join(", ")}</h3>
+        <h4>{resData.info.avgRating} Stars</h4>
+        <h4>Delivery Time : {resData.info.sla.deliveryTime}</h4>
       </div>
     );
   };
