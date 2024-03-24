@@ -26,3 +26,13 @@
 Two important hooks-
 -- useState()
 --useEffect()
+
+# why Single Page Applications ->
+
+React just changes the components(refresh components) does not reloads the page. Singla page applications.
+
+# Two types of Routing in Web App->
+
+- Client side Routing->
+
+-Server side Routing--> We make a network call of the page that we want and page gets reload as that html is coming from server.

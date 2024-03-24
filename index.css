@@ -14,18 +14,22 @@ body {
 .logo {
   width: 200px;
   margin-top: -10px;
+  mix-blend-mode: multiply;
 }
 .nav-items ul {
   display: flex;
   list-style: none;
   padding: 0px 25px;
   font-size: 25px;
+ 
 }
 .nav-items ul li {
   padding: 8px;
   margin: 10px;
   cursor: pointer;
+  
 }
+
 .login_btn {
   padding: 15px;
   border: none;
@@ -112,4 +116,10 @@ Footer {
   padding: 5px;
   height: 380px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.menu{
+  margin: 10px;
+}
+.menu1{
+  margin: 10px;
 }

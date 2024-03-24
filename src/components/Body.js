@@ -1,10 +1,11 @@
 import RestaurantCard from "./RestaurantCard";
-import {Shimmer, ShimmerSweets} from "./Shimmer";
+import { Shimmer, ShimmerSweets } from "./Shimmer";
+import { Link } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
 const Body = () => {
-  console.log("in body") // this will be printed minimum 2 times as our body is reRendered again after fetching the data and setting the new value of searchText.
+  console.log("in body"); // this will be printed minimum 2 times as our body is reRendered again after fetching the data and setting the new value of searchText.
   // Local State Variable- Super Pawerful Variable using Hooks
 
   const [RestaurantArrCons, setRestaurantArr] = useState([]); // as soon as i call setRestaurantArr React will find the difference and update the UI
@@ -13,8 +14,8 @@ const Body = () => {
   const arr=useState(RestaurantArr);
   const RestaurantArrCons=arr[0];
   const setRestaurantArr=arr[1];*/
-  const [searchText, setsearchText] = useState("");// Initially the input value is null so ""
-  const [filteredRestaurants, setfilteredRestaurants]=useState("");
+  const [searchText, setsearchText] = useState(""); // Initially the input value is null so ""
+  const [filteredRestaurants, setfilteredRestaurants] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -26,8 +27,14 @@ const Body = () => {
     const jsonData = await data.json();
     // console.log(jsonData)
     // console.log(jsonData.data.cards[1].card.card.gridElements.infoWithStyle.restaurants)
-    setRestaurantArr(jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-    setfilteredRestaurants(jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setRestaurantArr(
+      jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
+    setfilteredRestaurants(
+      jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
   };
   // Conditional Rendering -
   if (RestaurantArrCons.length === 0) {
@@ -37,30 +44,42 @@ const Body = () => {
     <div className="body">
       <div className="filter">
         <div className="search">
-          <input type="text" className="search_box" value={searchText} onChange={(e) => {
-            setsearchText(e.target.value);
-          }} />
+          <input
+            type="text"
+            className="search_box"
+            value={searchText}
+            onChange={(e) => {
+              setsearchText(e.target.value);
+            }}
+          />
           {/* to track the value of this input box we have to bind the value with the local state value.  */}
-          <button onClick={() => {
-            // Filter the restaurant cards and update the UI.
+          <button
+            onClick={() => {
+              // Filter the restaurant cards and update the UI.
 
-            //Get the search text .
+              //Get the search text .
 
-            // console.log([searchText][0])
-            const filterRes = RestaurantArrCons.filter((res) => {              
-              
-              return(res.info.name.toLowerCase().includes(searchText.toLowerCase()))
-            })
-            setfilteredRestaurants(filterRes);
-          }} className="search_btn">Search</button>
+              // console.log([searchText][0])
+              const filterRes = RestaurantArrCons.filter((res) => {
+                return res.info.name
+                  .toLowerCase()
+                  .includes(searchText.toLowerCase());
+              });
+              setfilteredRestaurants(filterRes);
+            }}
+            className="search_btn"
+          >
+            Search
+          </button>
         </div>
         <button
           className="filter-btn"
           onClick={() => {
             const newRestaurantArr = RestaurantArrCons.filter((restaurant) => {
-              return restaurant.avgRating > 4.1; // Return the condition for filtering
+              return restaurant.info.avgRating > 4.3; // Return the condition for filtering
             });
-            setRestaurantArr(newRestaurantArr);
+            setfilteredRestaurants(newRestaurantArr);
+            // console.log(newRestaurantArr);
           }}
         >
           Top Restaurant
@@ -81,13 +100,17 @@ const Body = () => {
         {/* resData is a prop */}
         {/*I have passed MsDonaldObj(Object) which is like passing argmnts in fns and later we will use this as props in our component*/}
         {filteredRestaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.id} resData={restaurant} />
+          <Link
+            key={restaurant.info.id}
+            to={"/restaurants/" + restaurant.info.id}
+          >
+            <RestaurantCard resData={restaurant} />
+          </Link>
           //Never to use index for key ALWAYS use unique key
 
           // not using key(not acceptable) <<<< index as a key <<<<<<<<<<<<< unique id(best practice).
         ))}
       </div>
-
     </div>
   );
 };
