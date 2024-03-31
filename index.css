@@ -123,3 +123,18 @@ Footer {
 .menu1{
   margin: 10px;
 }
+.user_cardFuncComp{
+  padding: 10px;
+  border: 1px solid black;
+  width: 50%;
+  margin: 10px;
+  background-color: #d8a879;
+}
+.user_cardClassComp{
+  padding: 10px;
+  border: 1px solid black;
+  width: 50%;
+  margin: 10px;
+  background-color: rgb(109, 218, 218);
+}
+
