@@ -1,8 +1,12 @@
 import { LOGO_URL } from "./utils/constants";
+import useOnlineStatus from "./utils/useOnlineStatus";
 import { useEffect, useState, useState } from "react";
 import { Link } from "react-router-dom"; // link work same as anchar tag(a) as browser do not understand Link is a wrapper over <a href> anchor tag.
 
+
+
 const Header = () => {
+  const onlineStatus=useOnlineStatus();
   let btnName = "Login"; // This is the normal variable that can not update the state of the UI;
   const [btnNameState, setbtnNameState] = useState("Login"); // this is state variable that works as the normal javaScript variable ."Login" is the default value.
 
@@ -27,16 +31,22 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
+        <li>Online Status: {onlineStatus ? "🟢" : "🔴"}</li>
           <li>
             <Link to="/">Home</Link>
           </li>{" "}
           {/* dont use(a href)this to nevigate to other pages as this loads the page */}
           <li>
-            <Link to="/about">About Us</Link> {/* Link is fast DO NOT reloads page just REFRESHES the components */}
+            <Link to="/about">About Us</Link>{" "}
+            {/* Link is fast DO NOT reloads page just REFRESHES the components */}
           </li>
           <li>
             {" "}
-            <Link to="/contact">Contact Us</Link> {/* Anchar tag reloads page */}
+            <Link to="/contact">Contact Us</Link>{" "}
+            {/* Anchar tag reloads page */}
+          </li>
+          <li>
+            <Link to="/grocery">Groceries</Link>
           </li>
           <li>Cart</li>
           <button

@@ -1,12 +1,14 @@
 import RestaurantCard from "./RestaurantCard";
-import { Shimmer, ShimmerSweets } from "./Shimmer";
+import { Shimmer } from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "./utils/useOnlineStatus";
 
 import { useEffect, useState } from "react";
 
 const Body = () => {
-  console.log("in body"); // this will be printed minimum 2 times as our body is reRendered again after fetching the data and setting the new value of searchText.
+  //console.log("in body"); // this will be printed minimum 2 times as our body is reRendered again after fetching the data and setting the new value of searchText.
   // Local State Variable- Super Pawerful Variable using Hooks
+  const onlineStatus = useOnlineStatus();
 
   const [RestaurantArrCons, setRestaurantArr] = useState([]); // as soon as i call setRestaurantArr React will find the difference and update the UI
 
@@ -16,6 +18,7 @@ const Body = () => {
   const setRestaurantArr=arr[1];*/
   const [searchText, setsearchText] = useState(""); // Initially the input value is null so ""
   const [filteredRestaurants, setfilteredRestaurants] = useState("");
+  
 
   useEffect(() => {
     fetchData();
@@ -39,6 +42,12 @@ const Body = () => {
   // Conditional Rendering -
   if (RestaurantArrCons.length === 0) {
     return <Shimmer />;
+  }
+
+  if (onlineStatus === false) {
+    return (
+      <h1>Looks like you are offline ❌. Check your internet connection.</h1>
+    );
   }
   return (
     <div className="body">

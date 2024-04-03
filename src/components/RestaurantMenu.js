@@ -1,33 +1,16 @@
-import React, { useEffect, useState } from "react";
 import { Shimmer } from "./Shimmer";
 import { useParams } from "react-router-dom";
-import { CDN_URL } from "./utils/constants";
-import RestaurantCard from "./RestaurantCard";
+import useRestaurantMenu from "./utils/useRestaurantMenu";
 
+// Now the main job RestaurantMenu is to just display the data
 const RestaurantMenu = () => {
   // State to store restaurant information
-  const [resInfo, setResInfo] = useState(null);
+  // const [resInfo, setResInfo] = useState(null);
 
   // Extracting restaurant ID from URL params
   const { resId } = useParams();
 
-  // Fetch restaurant menu when restaurant ID changes
-  useEffect(() => {
-    fetchMenu();
-  }, [resId]);
-
-  // Function to fetch restaurant menu data
-  const fetchMenu = async () => {
-    try {
-      const response = await fetch(
-        `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=27.1766701&lng=78.00807449999999&restaurantId=${resId}&catalog_qa=undefined&submitAction=ENTER`
-      );
-      const jsonData = await response.json();
-      setResInfo(jsonData.data);
-    } catch (error) {
-      console.error("Error fetching menu data:", error);
-    }
-  };
+  const resInfo = useRestaurantMenu(resId); // resId is restaurants Id
 
   // If restaurant data is still loading, display shimmer effect
   if (!resInfo) {
