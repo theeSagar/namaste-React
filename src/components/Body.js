@@ -25,7 +25,7 @@ const Body = () => {
   }, []);
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=27.1766701&lng=78.00807449999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/list/v5?lat=27.1766701&lng=78.00807449999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const jsonData = await data.json();
     // console.log(jsonData)
@@ -51,19 +51,18 @@ const Body = () => {
   }
   return (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex">
+        <div className="search m-4 p-4">
           <input
             type="text"
-            className="search_box"
+            className="border border-solid border-bl" 
             value={searchText}
             onChange={(e) => {
               setsearchText(e.target.value);
             }}
           />
           {/* to track the value of this input box we have to bind the value with the local state value.  */}
-          <button
-            onClick={() => {
+          <button className="px-3 py-2 bg-green-200 m-4 rounded-md hover:bg-green-400	" onClick={() => {
               // Filter the restaurant cards and update the UI.
 
               //Get the search text .
@@ -76,13 +75,13 @@ const Body = () => {
               });
               setfilteredRestaurants(filterRes);
             }}
-            className="search_btn"
           >
             Search
           </button>
         </div>
+        <div className="px-4 py-2 flex items-center">
         <button
-          className="filter-btn"
+          className="filter-btn px-4 py-2 bg-gray-100 hover:bg-gray-400 rounded-md" 
           onClick={() => {
             const newRestaurantArr = RestaurantArrCons.filter((restaurant) => {
               return restaurant.info.avgRating > 4.3; // Return the condition for filtering
@@ -93,8 +92,10 @@ const Body = () => {
         >
           Top Restaurant
         </button>
+
+        </div>
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {/* RestaurantCard component will be rendered here -- */}
         {/* <RestaurantCard resData={RestaurantArr[0]} />
           <RestaurantCard resData={RestaurantArr[1]} />
