@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { CDN_URL } from "./utils/constants";
+import Header from "./Header";
 
 const RestaurantCard = (props) => {
   const { resData } = props;
@@ -15,7 +16,7 @@ const RestaurantCard = (props) => {
           state: { imageUrl },
         }}
       >
-        <img className="rounded-lg" alt="Restaurant Logo" src={imageUrl} />
+        <img className="rounded-lg " alt="Restaurant Logo" src={imageUrl} />
       </Link>
       <h3 className="font-bold text-lg py-5">{resData.info.name}</h3>
       {/* <h3>Id: {resData.info.id}</h3> */}
@@ -30,5 +31,37 @@ const RestaurantCard = (props) => {
     </div>
   );
 };
+
+// Higher Oder Component
+
+
+// Input- RestaurantCard===> RestaurantCardOffer.
+
+export const withOffer = (RestaurantCard) => {
+  return (props) => {
+    // Adding checks to prevent TypeError
+    const header = props.resData && 
+                   props.resData.info && 
+                   props.resData.info.aggregatedDiscountInfoV3
+                   ? props.resData.info.aggregatedDiscountInfoV3.header
+                   : '';
+    const subHeader = props.resData && 
+                      props.resData.info && 
+                      props.resData.info.aggregatedDiscountInfoV3
+                      ? props.resData.info.aggregatedDiscountInfoV3.subHeader
+                      : '';
+
+    return (
+      <div>
+        <label className="absolute bg-black text-white m-2 p-2  rounded-lg">
+          {header} {/* Accessing header */}
+          {subHeader} {/* Accessing subHeader */}
+        </label>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
+};
+
 
 export default RestaurantCard;

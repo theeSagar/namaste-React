@@ -1,6 +1,8 @@
+import  { useState } from "react";
 import { Shimmer } from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "./utils/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
 
 // Now the main job RestaurantMenu is to just display the data
 const RestaurantMenu = () => {
@@ -9,6 +11,7 @@ const RestaurantMenu = () => {
 
   // Extracting restaurant ID from URL params
   const { resId } = useParams();
+  const [showIndex,setShowIndex]=useState(0)
 
   const resInfo = useRestaurantMenu(resId); // resId is restaurants Id
 
@@ -22,17 +25,16 @@ const RestaurantMenu = () => {
 
   // Extracting item cards and more item cards
 
-  const { itemCards } =
-    resInfo.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card
-      ?.card ?? {};
-  const moreItemCards =
-    resInfo.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card
-      ?.itemCards;
-  const moreItemCards2 =
-    resInfo.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]?.card?.card
-      ?.itemCards;
+  const catogries =
+    resInfo.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (c) =>
+        c.card?.["card"]?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
 
   // Extracting title of the additional items section
+
+  /*
   const title1 =
     resInfo.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card
       ?.title;
@@ -41,48 +43,30 @@ const RestaurantMenu = () => {
   const title2 =
     resInfo.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]?.card?.card
       ?.title;
-  console.log(title2);
-
+*/
   return (
-    <div className="menu1">
-      <h1>{name}</h1>
-      <h3>{totalRatingsString}</h3>
-      <h4>{locality}</h4>
-      <h3>{cuisines.join(", ")}</h3>
-      <h3>{costForTwoMessage}</h3>
-      <h2>{title1}</h2>
-      <ul>
-        {itemCards &&
-          itemCards.length > 0 &&
-          itemCards.map((item) => (
-            <li key={item.card.info.id}>
-              {item.card.info.name} - Rs{" "}
-              {item.card.info.price / 100 || item.card.info.defaultPrice}
-            </li>
-          ))}
-      </ul>
-      <h2>{title}</h2>
-      <ul>
-        {moreItemCards &&
-          moreItemCards.length > 0 &&
-          moreItemCards.map((item) => (
-            <li key={item.card.info.id}>
-              {item.card.info.name} - Rs{" "}
-              {item.card.info.price / 100 || item.card.info.defaultPrice}
-            </li>
-          ))}
-      </ul>
-      <h2>{title2}</h2>
-      <ul>
-        {moreItemCards2 &&
-          moreItemCards2.length > 0 &&
-          moreItemCards2.map((item) => (
-            <li key={item.card.info.id}>
-              {item.card.info.name} - Rs{" "}
-              {item.card.info.price / 100 || item.card.info.defaultPrice}
-            </li>
-          ))}
-      </ul>
+    <div className="text-center">
+      <h1 className="font-bold my-7 text-2xl">{name}</h1>
+      <p className="font-bold">
+        <h4 className="m-5">{locality}, Agra</h4>
+        <h3>{totalRatingsString}</h3>
+        {/* <h3>{cuisines.join(", ")}</h3>
+        <h3>{costForTwoMessage}</h3> */}
+      </p>
+      {/* Catogries Accordions */}
+      {catogries.map((category, index) => {
+        return (
+          <RestaurantCategory
+          //this is a control component.
+            key={category?.card?.card.title}
+            data={category?.card?.card}
+            showIteam={index === setShowIndex ? true : false}
+            setShowIndex={()=>setShowIndex(index)}
+          />
+        ); // if index is 1 make it true else false.
+
+        // now we are making restaurantMenu to control all of this resraurant to all the restauirantCategory Iteam
+      })}
     </div>
   );
 };

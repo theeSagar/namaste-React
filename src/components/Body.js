@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard ,{withOffer} from "./RestaurantCard";
 import { Shimmer } from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "./utils/useOnlineStatus";
@@ -6,7 +6,7 @@ import useOnlineStatus from "./utils/useOnlineStatus";
 import { useEffect, useState } from "react";
 
 const Body = () => {
-  //console.log("in body"); // this will be printed minimum 2 times as our body is reRendered again after fetching the data and setting the new value of searchText.
+  // console.log("in body"); // this will be printed minimum 2 times as our body is reRendered again after fetching the data and setting the new value of searchText.
   // Local State Variable- Super Pawerful Variable using Hooks
   const onlineStatus = useOnlineStatus();
 
@@ -18,8 +18,9 @@ const Body = () => {
   const setRestaurantArr=arr[1];*/
   const [searchText, setsearchText] = useState(""); // Initially the input value is null so ""
   const [filteredRestaurants, setfilteredRestaurants] = useState("");
-  
+  const RestaurantWithOffer=withOffer(RestaurantCard);
 
+  console.log(filteredRestaurants);
   useEffect(() => {
     fetchData();
   }, []);
@@ -87,7 +88,6 @@ const Body = () => {
               return restaurant.info.avgRating > 4.3; // Return the condition for filtering
             });
             setfilteredRestaurants(newRestaurantArr);
-            // console.log(newRestaurantArr);
           }}
         >
           Top Restaurant
@@ -97,28 +97,23 @@ const Body = () => {
       </div>
       <div className="flex flex-wrap">
         {/* RestaurantCard component will be rendered here -- */}
-        {/* <RestaurantCard resData={RestaurantArr[0]} />
-          <RestaurantCard resData={RestaurantArr[1]} />
-          <RestaurantCard resData={RestaurantArr[3]} />
-          <RestaurantCard resData={RestaurantArr[4]} />
-          <RestaurantCard resData={RestaurantArr[5]} />
-          <RestaurantCard resData={RestaurantArr[6]} />
-          <RestaurantCard resData={RestaurantArr[7]} />
-          <RestaurantCard resData={RestaurantArr[8]} />
-          <RestaurantCard resData={RestaurantArr[9]} />
-          <RestaurantCard resData={RestaurantArr[10]} /> */}
-        {/* resData is a prop */}
+                {/* resData is a prop */}
         {/*I have passed MsDonaldObj(Object) which is like passing argmnts in fns and later we will use this as props in our component*/}
         {filteredRestaurants.map((restaurant) => (
           <Link
             key={restaurant.info.id}
             to={"/restaurants/" + restaurant.info.id}
           >
-            <RestaurantCard resData={restaurant} />
+          {
+          restaurant.info.aggregatedDiscountInfoV3 ? < RestaurantWithOffer resData={restaurant}/>:<RestaurantCard resData={restaurant} />
+          }
+          {/* <RestaurantCard resData={restaurant} /> */}
+
           </Link>
           //Never to use index for key ALWAYS use unique key
 
           // not using key(not acceptable) <<<< index as a key <<<<<<<<<<<<< unique id(best practice).
+        
         ))}
       </div>
     </div>

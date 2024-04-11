@@ -1,6 +1,6 @@
 import { LOGO_URL } from "./utils/constants";
 import useOnlineStatus from "./utils/useOnlineStatus";
-import { useEffect, useState, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; // link work same as anchar tag(a) as browser do not understand Link is a wrapper over <a href> anchor tag.
 
 const Header = () => {

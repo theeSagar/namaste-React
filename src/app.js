@@ -24,12 +24,12 @@ const Footer = () => {
   return (
     <footer>
       <div className="footer-container">
-        <ul>
+        {/* <ul>
           <li>Home</li>
           <li>Abour </li>
           <li>Center</li>
           <li>Read More</li>
-        </ul>
+        </ul> */}
       </div>
     </footer>
   );

@@ -45,17 +45,23 @@
   "parcel": "^2.12.0",
  
    
+  "parcel-bundler": "^1.12.5",
+ 
+   
   "postcss": "^8.4.38",
  
    
   "process": "^0.11.10",
  
    
-  "tailwindcss": "^3.4.3"
+  "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
  
   },
  
   "dependencies": {
+ 
+   
+  "autoprefixer": "^9.8.8",
  
    
   "react": "^18.2.0",
